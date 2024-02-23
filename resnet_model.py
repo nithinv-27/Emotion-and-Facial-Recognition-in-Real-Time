@@ -99,7 +99,6 @@ if __name__== "__main__":
 
                     # Calculate loss
                     loss=loss_fn(output, label)
-                    print(type(loss))
 
                     # Calculate backward gradients
                     loss.backward()
@@ -117,14 +116,17 @@ if __name__== "__main__":
             
         return losses
 
-    epochs=5
+    epochs=100
     history= train_model(model=model, epochs=epochs, loss_fn=loss_fn, optimizer=optimizer)
 
-    loss_y=np.array(history)
-    x_axis=np.arange(1,epochs+1)
-    plt.xlabel('Total no. of epochs')
-    plt.ylabel('Loss per epoch')
-    plt.imshow(x_axis,loss_y)
+    torch.save(history, 'history.pt')
+    # loss_y=np.array(history)
+    # x_axis=np.arange(1,epochs+1)
+    # plt.xlabel('Total no. of epochs')
+    # plt.ylabel('Loss per epoch')
+    # plt.imshow(x_axis,loss_y)
+
+    torch.save(model.state_dict(), 'resnet_face_detection_model.pth')
     
 
 
